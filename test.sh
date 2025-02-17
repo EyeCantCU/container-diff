@@ -27,4 +27,4 @@ if [[ $files ]]; then
 fi
 
 echo "Checking go-addlicense..."
-addlicense -check -l apache -ignore \{actions,differs,vendor,setup-tests,out\}/**/* -ignore cloudbuild\*yaml * 
+addlicense -check -l apache -ignore \{actions,differs,vendor,setup-tests,out\}/**/* -ignore *
