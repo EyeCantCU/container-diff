@@ -1,0 +1,62 @@
+project_name: container-diff
+version: 2
+
+before:
+  hooks:
+    - go mod download
+    - /bin/bash -c 'if [ -n "$(git --no-pager diff --exit-code go.mod go.sum)" ]; then exit 1; fi'
+
+env:
+  - COSIGN_YES=true
+
+builds:
+- id: container-diff-build
+  binary: container-diff
+  main: ./
+  env:
+  - CGO_ENABLED=0
+  goos:
+    - darwin
+    - linux
+  goarch:
+    - amd64
+    - arm64
+  flags:
+    - -trimpath
+  mod_timestamp: '{{ .CommitTimestamp }}'
+  ldflags:
+    - -extldflags "-static"
+    - "{{ .Env.LDFLAGS }}"
+
+signs:
+  - id: container-diff-cosign
+    cmd: cosign
+    certificate: "${artifact}.crt"
+    args: ["sign-blob", "--output-signature", "${signature}", "--output-certificate", "${certificate}", "${artifact}", "--yes"]
+    artifacts: all
+
+archives:
+  - files:
+      - LICENSE
+    wrap_in_directory: true
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  use: github-native
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore(docs):'
+      - '^chore(tests):'
+
+release:
+  draft: false
+  prerelease: auto
+  name_template: "Release {{ .Tag }}"

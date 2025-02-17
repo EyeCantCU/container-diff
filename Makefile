@@ -62,10 +62,13 @@ test: $(BUILD_DIR)/$(PROJECT)
 integration: $(BUILD_DIR)/$(PROJECT)
 	go test -v -tags integration $(REPOPATH)/tests -timeout 20m
 
+.PHONY: snapshot
+snapshot: ## Run Goreleaser in snapshot mode
+	LDFLAGS=$(GO_LDFLAGS) goreleaser release --clean --snapshot --skip=sign,publish
+
 .PHONY: release
-release: cross
-	gsutil cp $(BUILD_DIR)/$(PROJECT)-* gs://$(RELEASE_BUCKET)/$(shell $(BUILD_DIR)/$(PROJECT) version --short)/
-	gsutil cp $(BUILD_DIR)/$(PROJECT)-* gs://$(RELEASE_BUCKET)/latest/
+release: ## Run Goreleaser in release mode
+	LDFLAGS=$(GO_LDFLAGS) goreleaser release --clean
 
 .PHONY: clean
 clean:
