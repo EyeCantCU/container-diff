@@ -6,7 +6,7 @@ sudo: required
 services:
   - docker
 
-go_import_path: github.com/GoogleContainerTools/container-diff
+go_import_path: github.com/EyeCantCU/container-diff
 
 script:
  - travis_wait make cross

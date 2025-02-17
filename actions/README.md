@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run container-diff
-        uses: GoogleContainerTools/container-diff/actions@master
+        uses: EyeCantCU/container-diff/actions@master
         with:
           # Note this command is the default and does not need to be included
           command: analyze          

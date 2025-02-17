@@ -41,7 +41,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-const org = "GoogleContainerTools"
+const org = "EyeCantCU"
 const repo = "container-diff"
 
 func main() {

@@ -37,8 +37,8 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/mutate"
 	"github.com/google/go-containerregistry/pkg/v1/random"
 
-	pkgutil "github.com/GoogleContainerTools/container-diff/pkg/util"
-	"github.com/GoogleContainerTools/container-diff/util"
+	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
+	"github.com/EyeCantCU/container-diff/util"
 	godocker "github.com/fsouza/go-dockerclient"
 
 	"github.com/nightlyone/lockfile"

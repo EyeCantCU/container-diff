@@ -20,8 +20,8 @@ import (
 	"reflect"
 	"testing"
 
-	pkgutil "github.com/GoogleContainerTools/container-diff/pkg/util"
-	"github.com/GoogleContainerTools/container-diff/util"
+	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
+	"github.com/EyeCantCU/container-diff/util"
 )
 
 func TestGetNodePackages(t *testing.T) {

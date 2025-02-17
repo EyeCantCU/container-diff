@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/GoogleContainerTools/container-diff/cmd"
+	"github.com/EyeCantCU/container-diff/cmd"
 	"github.com/pkg/profile"
 )
 

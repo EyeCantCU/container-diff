@@ -19,7 +19,7 @@ package util
 import (
 	"testing"
 
-	pkgutil "github.com/GoogleContainerTools/container-diff/pkg/util"
+	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
 )
 
 func TestImageTags(t *testing.T) {

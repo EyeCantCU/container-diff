@@ -19,8 +19,8 @@ package differs
 import (
 	"strconv"
 
-	pkgutil "github.com/GoogleContainerTools/container-diff/pkg/util"
-	"github.com/GoogleContainerTools/container-diff/util"
+	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
+	"github.com/EyeCantCU/container-diff/util"
 )
 
 type SizeAnalyzer struct {

@@ -19,8 +19,8 @@ package differs
 import (
 	"strings"
 
-	pkgutil "github.com/GoogleContainerTools/container-diff/pkg/util"
-	"github.com/GoogleContainerTools/container-diff/util"
+	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
+	"github.com/EyeCantCU/container-diff/util"
 	"github.com/google/go-containerregistry/pkg/v1"
 )
 
