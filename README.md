@@ -1,8 +1,5 @@
 # container-diff
 
-[![Build
-Status](https://travis-ci.org/GoogleContainerTools/container-diff.svg?branch=master)](https://travis-ci.org/GoogleContainerTools/container-diff)
-
 ## What is container-diff?
 
 container-diff is a tool for analyzing and comparing container images. container-diff can examine images along several different criteria, including:
@@ -15,40 +12,6 @@ container-diff is a tool for analyzing and comparing container images. container
 - npm packages
 
 These analyses can be performed on a single image, or a diff can be performed on two images to compare. The tool can help users better understand what is changing inside their images, and give them a better look at what their images contain.
-
-**NOTE: container-diff is a Google project, but is not currently being officially supported by Google and is in maintenance mode. However, contributions are still welcome and encouraged!**
-
-## Installation
-
-### macOS
-```shell
-curl -LO https://storage.googleapis.com/container-diff/latest/container-diff-darwin-amd64 && \
-sudo install container-diff-darwin-amd64 /usr/local/bin/container-diff
-```
-
-### Linux
-```shell
-curl -LO https://storage.googleapis.com/container-diff/latest/container-diff-linux-amd64 && \
-sudo install container-diff-linux-amd64 /usr/local/bin/container-diff
-```
-
-OR, if you want to avoid using sudo:
-
-```shell
-curl -LO https://storage.googleapis.com/container-diff/latest/container-diff-linux-amd64 && \
-mkdir -p "$HOME/bin" && export PATH="$PATH:$HOME/bin" && \
-install container-diff-linux-amd64 $HOME/bin/container-diff
-```
-
-There is also an [Arch Linux package](https://www.archlinux.org/packages/community/x86_64/container-diff/). You can install by running:
-
-```shell
-pacman -S container-diff
-```
-
-### Windows
-Download the [container-diff-windows-amd64.exe](https://storage.googleapis.com/container-diff/latest/container-diff-windows-amd64.exe) file, rename it to `container-diff.exe` and add it to your path
-
 
 ## Quickstart
 
