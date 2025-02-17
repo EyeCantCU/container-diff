@@ -31,7 +31,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 )
 
@@ -268,14 +268,14 @@ func TestMain(m *testing.M) {
 	// setup
 	ctx := context.Background()
 	cli, _ := newClient()
-	closer, err := cli.ImagePull(ctx, multiBase, types.ImagePullOptions{})
+	closer, err := cli.ImagePull(ctx, multiBase, image.PullOptions{})
 	if err != nil {
 		fmt.Printf("Error retrieving docker client: %s", err)
 		os.Exit(1)
 	}
 	io.Copy(os.Stdout, closer)
 
-	closer, err = cli.ImagePull(ctx, multiModified, types.ImagePullOptions{})
+	closer, err = cli.ImagePull(ctx, multiModified, image.PullOptions{})
 	if err != nil {
 		fmt.Printf("Error retrieving docker client: %s", err)
 		os.Exit(1)
