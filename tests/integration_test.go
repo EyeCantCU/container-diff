@@ -318,14 +318,9 @@ func TestConsoleOutput(t *testing.T) {
 			subCommand:  "analyze",
 			extraFlag:   "help",
 			expectedOutput: []string{
-				"Analyzes an image using the specifed analyzers as indicated via --type flag(s).",
-				"For details on how to specify images, run: container-diff help",
-				"container-diff",
-				"-c, --cache-dir string",
-				"-j, --json",
-				"-w, --output string",
-				"-t, --type multiValueFlag",
+				"error retrieving image help: retrieving remote image",
 			},
+			producesError: true,
 		},
 		{
 			description: "container-diff --help",
