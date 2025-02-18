@@ -30,6 +30,8 @@ const fileAnalyzer = "file"
 const layerAnalyzer = "layer"
 const sizeAnalyzer = "size"
 const sizeLayerAnalyzer = "sizelayer"
+const apkAnalyzer = "apk"
+const apkLayerAnalyzer = "apklayer"
 const aptAnalyzer = "apt"
 const aptLayerAnalyzer = "aptlayer"
 const rpmAnalyzer = "rpm"
@@ -62,6 +64,8 @@ var Analyzers = map[string]Analyzer{
 	layerAnalyzer:     FileLayerAnalyzer{},
 	sizeAnalyzer:      SizeAnalyzer{},
 	sizeLayerAnalyzer: SizeLayerAnalyzer{},
+	apkAnalyzer:       ApkAnalyzer{},
+	apkLayerAnalyzer:  ApkLayerAnalyzer{},
 	aptAnalyzer:       AptAnalyzer{},
 	aptLayerAnalyzer:  AptLayerAnalyzer{},
 	rpmAnalyzer:       RPMAnalyzer{},
@@ -71,7 +75,7 @@ var Analyzers = map[string]Analyzer{
 	emergeAnalyzer:    EmergeAnalyzer{},
 }
 
-var LayerAnalyzers = [...]string{layerAnalyzer, sizeLayerAnalyzer, aptLayerAnalyzer, rpmLayerAnalyzer}
+var LayerAnalyzers = [...]string{layerAnalyzer, sizeLayerAnalyzer, apkLayerAnalyzer, aptLayerAnalyzer, rpmLayerAnalyzer}
 
 func (req DiffRequest) GetDiff() (map[string]util.Result, error) {
 	img1 := req.Image1
