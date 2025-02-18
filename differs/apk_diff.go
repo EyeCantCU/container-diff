@@ -18,14 +18,16 @@ import (
 	"bufio"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	pkgutil "github.com/EyeCantCU/container-diff/pkg/util"
 	"github.com/EyeCantCU/container-diff/util"
+	"github.com/sirupsen/logrus"
 )
 
-// APK package database location
-const apkWorldFile string = "etc/apk/world"
+// APK installed package database location
+const apkInstalledPackagesFile string = "lib/apk/db/installed"
 
 type ApkAnalyzer struct {
 }
@@ -55,12 +57,12 @@ func readWorldFile(root string) (map[string]util.PackageInfo, error) {
 		// invalid image directory path
 		return packages, err
 	}
-	worldFile := filepath.Join(root, apkWorldFile)
-	if _, err := os.Stat(worldFile); err != nil {
-		// world file does not exist in this layer
+	installedPackagesFile := filepath.Join(root, apkInstalledPackagesFile)
+	if _, err := os.Stat(installedPackagesFile); err != nil {
+		// APK installed packages file does not exist in this layer
 		return packages, nil
 	}
-	if file, err := os.Open(worldFile); err == nil {
+	if file, err := os.Open(installedPackagesFile); err == nil {
 		// make sure it gets closed
 		defer file.Close()
 
@@ -78,23 +80,42 @@ func readWorldFile(root string) (map[string]util.PackageInfo, error) {
 }
 
 func parseApkInfo(text string, currPackage string, packages map[string]util.PackageInfo) string {
-	// Packages in the APK world file for Wolfi are split by package name and version
-	line := strings.Split(text, "=")
+	line := strings.Split(text, ":")
+	if len(line) == 2 {
+		key := line[0]
+		value := line[1]
 
-	currPackage = line[0]
-	currPackageVersion := line[1]
-
-	// Initialize package info
-	currPackageInfo, ok := packages[currPackage]
-	if !ok {
-		currPackageInfo = util.PackageInfo{}
+		switch key {
+		case "P":
+			return value
+		case "V":
+			currPackageInfo, ok := packages[currPackage]
+			if !ok {
+				currPackageInfo = util.PackageInfo{}
+			}
+			currPackageInfo.Version = value
+			packages[currPackage] = currPackageInfo
+			return currPackage
+		case "I":
+			currPackageInfo, ok := packages[currPackage]
+			if !ok {
+				currPackageInfo = util.PackageInfo{}
+			}
+			var size int64
+			var err error
+			size, err = strconv.ParseInt(value, 10, 64)
+			if err != nil {
+				logrus.Errorf("Could not get size for %s: %s", currPackage, err)
+				size = -1
+			}
+			// Installed-Size is in KB, so we convert it to bytes to keep consistent with the tool's size units
+			currPackageInfo.Size = size
+			packages[currPackage] = currPackageInfo
+			return currPackage
+		default:
+			return currPackage
+		}
 	}
-
-	// Populate package info
-	currPackageInfo.Version = currPackageVersion
-	packages[currPackage] = currPackageInfo
-
-	// Return package name
 	return currPackage
 }
 
@@ -122,9 +143,9 @@ func (a ApkLayerAnalyzer) getPackages(image pkgutil.Image) ([]map[string]util.Pa
 		// invalid image directory path
 		return packages, err
 	}
-	worldFile := filepath.Join(image.FSPath, apkWorldFile)
-	if _, err := os.Stat(worldFile); err != nil {
-		// status file does not exist in this image
+	installedPackagesFile := filepath.Join(image.FSPath, apkInstalledPackagesFile)
+	if _, err := os.Stat(installedPackagesFile); err != nil {
+		// APK installed packages file does not exist in this image
 		return packages, nil
 	}
 	for _, layer := range image.Layers {
