@@ -6,6 +6,7 @@ container-diff is a tool for analyzing and comparing container images. container
 - Docker Image History
 - Image file system
 - Image size
+- APK packages
 - Apt packages
 - RPM packages
 - pip packages
@@ -24,6 +25,7 @@ container-diff analyze <img> --type=file  [File System]
 container-diff analyze <img> --type=size  [Size]
 container-diff analyze <img> --type=rpm  [RPM]
 container-diff analyze <img> --type=pip  [Pip]
+container-diff analyze <img> --type=apk  [APK]
 container-diff analyze <img> --type=apt  [Apt]
 container-diff analyze <img> --type=node  [Node]
 container-diff analyze <img> --type=apt --type=node  [Apt and Node]
@@ -40,6 +42,7 @@ container-diff diff <img1> <img2> --type=file  [File System]
 container-diff diff <img1> <img2> --type=size  [Size]
 container-diff diff <img1> <img2> --type=rpm  [RPM]
 container-diff diff <img1> <img2> --type=pip  [Pip]
+container-diff diff <img1> <img2> --type=apk  [APK]
 container-diff diff <img1> <img2> --type=apt  [Apt]
 container-diff diff <img1> <img2> --type=node  [Node]
 ```
