@@ -36,9 +36,11 @@ signs:
     artifacts: all
 
 archives:
-  - format: "binary"
+  - id: container-diff-binaries
+    formats: ["binary"]
     name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
-  - format: "tar.gz"
+  - id: container-diff-archives
+    formats: ["tar.gz"]
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     files:
       - LICENSE
@@ -48,7 +50,7 @@ checksum:
   name_template: 'checksums.txt'
 
 snapshot:
-  name_template: "{{ .Tag }}-next"
+  version_template: "{{ .Tag }}-next"
 
 changelog:
   use: github-native
