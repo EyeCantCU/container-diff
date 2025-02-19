@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	code.cloudfoundry.org/bytefmt v0.29.0
 	github.com/docker/docker v27.5.1+incompatible
-	github.com/fsouza/go-dockerclient v1.12.0
+	github.com/fsouza/go-dockerclient v1.12.1
 	github.com/google/go-containerregistry v0.20.3
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/mitchellh/go-homedir v1.1.0
@@ -62,7 +62,6 @@ require (
 	go.opentelemetry.io/proto/otlp v1.0.0 // indirect
 	golang.org/x/sync v0.11.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/term v0.29.0 // indirect
 	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20231120223509-83a465c0220f // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240401170217-c3f982113cda // indirect
