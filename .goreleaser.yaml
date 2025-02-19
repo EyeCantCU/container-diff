@@ -36,7 +36,11 @@ signs:
     artifacts: all
 
 archives:
-  - files:
+  - format: "binary"
+    name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
+  - format: "tar.gz"
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    files:
       - LICENSE
     wrap_in_directory: true
 
