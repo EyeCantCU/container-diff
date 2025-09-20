@@ -1,6 +1,6 @@
 module github.com/EyeCantCU/container-diff
 
-go 1.24.2
+go 1.25.1
 
 require (
 	code.cloudfoundry.org/bytefmt v0.51.0
